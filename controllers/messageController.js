@@ -1,6 +1,6 @@
 const { sendMessage } = require('../nodemailer/contactMessage');
 
-// @desc Receive contact message
+// @desc Receive contact message from users
 // @route POST /api/message/receive
 // @access Public
 const receiveMessage = async (req, res) => {

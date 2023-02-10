@@ -3,7 +3,7 @@ const nodemailer = require('nodemailer');
 const { google } = require('googleapis');
 
 // Read the HTML file
-let html = fs.readFileSync('./views/contactMessage.html', 'utf-8');
+let html = fs.readFileSync('views/contactMessage.html', 'utf-8');
 
 const user = process.env.USER;
 const pass = process.env.PASS;
