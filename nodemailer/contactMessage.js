@@ -3,15 +3,6 @@ const path = require('path');
 const nodemailer = require('nodemailer');
 const { google } = require('googleapis');
 
-// Read the HTML file
-// let html = fs.readFileSync('views/contactMessage.html', 'utf-8');
-
-// Copy the file to a location within the project directory
-// fs.copyFileSync(
-//   path.resolve(__dirname, 'views', 'contactMessage.html'),
-//   path.resolve(__dirname, 'contactMessage.html')
-// );
-
 const filePath = path.join(__dirname, '../views', 'contact-message.html');
 let html = fs.readFileSync(filePath, 'utf-8');
 
