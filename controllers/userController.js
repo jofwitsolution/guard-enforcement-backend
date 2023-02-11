@@ -77,8 +77,8 @@ const signupUser = async (req, res, next) => {
     // generate a JSON Web Token
     const token = generateToken(
       user._id,
-      user.firstName,
-      user.lastName,
+      user.profile.firstName,
+      user.profile.lastName,
       user.role,
       user.isAdmin
     );
