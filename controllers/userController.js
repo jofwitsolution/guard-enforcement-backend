@@ -94,14 +94,19 @@ const signupUser = async (req, res, next) => {
 // @desc Get user profile
 // @route GET /api/users/:id/profile
 // @access Private
-const getUserProfile = async (req, res) => {
-  const user = await User.findById(req.params.id).select('-password -__v');
+const getUserProfile = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id).select('-password -__v');
 
-  if (user) {
-    res.json(user);
-  } else {
-    res.status(404).json({ message: 'User not found' });
+    if (user) {
+      res.json(user);
+    } else {
+      res.status(404).json({ message: 'User not found' });
+    }
+  } catch (error) {
+    next(error)
   }
+ 
 };
 
 // @desc Update user profile
