@@ -96,7 +96,9 @@ const signupUser = async (req, res, next) => {
 // @access Private
 const getUserProfile = async (req, res, next) => {
   try {
-    const user = await User.findById(req.params.id).select('-password -__v');
+    const user = await User.findById(req.params.id).select(
+      '-password -__v -hasPermision -isAdmin'
+    );
 
     if (user) {
       res.json(user);
@@ -104,9 +106,8 @@ const getUserProfile = async (req, res, next) => {
       res.status(404).json({ message: 'User not found' });
     }
   } catch (error) {
-    next(error)
+    next(error);
   }
- 
 };
 
 // @desc Update user profile
@@ -123,8 +124,11 @@ const updateUserProfile = async (req, res, next) => {
     const user = await User.findById(req.params.id);
 
     if (user) {
-      user.firstName = req.body.firstName;
-      user.lastName = req.body.lastName;
+      user.profile.firstName = req.body.firstName;
+      user.profile.lastName = req.body.lastName;
+      user.profile.phone = req.body.phone;
+      user.profile.address = req.body.address;
+      user.profile.country = req.body.country;
 
       const updatedUser = await user.save();
 
@@ -133,14 +137,16 @@ const updateUserProfile = async (req, res, next) => {
         firstName: updatedUser.firstName,
         lastName: updatedUser.lastName,
         role: updatedUser.role,
+        isAdmin: updatedUser.isAdmin,
       });
 
       res.json({
         _id: updatedUser._id,
-        firstName: updatedUser.firstName,
-        lastName: updatedUser.lastName,
-        email: updatedUser.email,
-        role: updatedUser.role,
+        firstName: updatedUser.profile.firstName,
+        lastName: updatedUser.profile.lastName,
+        phone: updatedUser.profile.phone,
+        address: updatedUser.profile.address,
+        country: updatedUser.profile.country,
         token: token,
       });
     } else {
