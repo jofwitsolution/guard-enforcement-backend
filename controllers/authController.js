@@ -45,15 +45,16 @@ const loginUser = async (req, res, next) => {
     if (process.env.NODE_ENV === "production") {
       isSecureCookie = true;
       sameSiteCookie = "None";
+      console.log("production");
     }
 
-    res.cookie("session", token, {
-      httpOnly: false,
-      secure: isSecureCookie,
-      signed: false,
-      expires: new Date(Date.now() + oneDay),
-      sameSite: sameSiteCookie,
-    });
+    // res.cookie("session", token, {
+    //   httpOnly: false,
+    //   secure: isSecureCookie,
+    //   signed: false,
+    //   expires: new Date(Date.now() + oneDay),
+    //   sameSite: sameSiteCookie,
+    // });
     res.cookie("accessToken", token, {
       httpOnly: true,
       secure: isSecureCookie,
