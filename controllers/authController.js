@@ -38,31 +38,6 @@ const loginUser = async (req, res, next) => {
       user.isAdmin
     );
 
-    const oneDay = 1000 * 60 * 60 * 24;
-
-    let isSecureCookie = false;
-    let sameSiteCookie = "lax";
-    if (process.env.NODE_ENV === "production") {
-      isSecureCookie = true;
-      sameSiteCookie = "none";
-    }
-
-    // res.cookie("session", token, {
-    //   httpOnly: false,
-    //   secure: isSecureCookie,
-    //   signed: false,
-    //   expires: new Date(Date.now() + oneDay),
-    //   sameSite: sameSiteCookie,
-    // });
-    res.cookie("accessToken", token, {
-      httpOnly: true,
-      secure: true,
-      signed: true,
-      // expires: new Date(Date.now() + oneDay),
-      maxAge: 36000000,
-      sameSite: sameSiteCookie,
-    });
-
     res.json({
       token: token,
     });

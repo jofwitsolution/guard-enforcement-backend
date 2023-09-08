@@ -7,9 +7,6 @@ const jwt_secret = process.env.JWT_SECRET;
 const protect = async (req, res, next) => {
   let token;
 
-  const { accessToken } = req.signedCookies;
-  console.log(accessToken);
-
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")
