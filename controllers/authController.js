@@ -44,8 +44,7 @@ const loginUser = async (req, res, next) => {
     let sameSiteCookie = "Lax";
     if (process.env.NODE_ENV === "production") {
       isSecureCookie = true;
-      sameSiteCookie = "None";
-      console.log("production");
+      sameSiteCookie = "False";
     }
 
     // res.cookie("session", token, {
