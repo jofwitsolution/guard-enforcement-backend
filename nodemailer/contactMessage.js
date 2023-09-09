@@ -30,7 +30,7 @@ const sendMessage = async ({ fullName, email, phone, message }) => {
 
   const mailOptions = {
     from: `Guard Enforcement Security and Patrol <mediaguardenforcement@gmail.com>`,
-    to: ["faleyeoluwafemi1@gmail.com"],
+    to: ["info@guardenforcement.com"],
     subject: "Service Enquiry",
     html,
   };
