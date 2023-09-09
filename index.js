@@ -1,7 +1,6 @@
 require("dotenv").config();
 const cors = require("cors");
 const express = require("express");
-const cookieParser = require("cookie-parser");
 const helmet = require("helmet");
 const compression = require("compression");
 const { mongodb } = require("./db");
@@ -24,7 +23,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ limit: "50mb" }));
 // app.use(cookieParser());
 
-app.use(cookieParser(process.env.JWT_SECRET));
 // Cross Origin Resource Sharing
 app.use(
   cors({

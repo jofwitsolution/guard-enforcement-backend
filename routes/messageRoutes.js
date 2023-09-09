@@ -1,7 +1,7 @@
-const { receiveMessage } = require('../controllers/messageController');
-const express = require('express');
+const { sendContactMessage } = require("../controllers/messageController");
+const express = require("express");
 const router = express.Router();
 
-router.post('/receive', receiveMessage);
+router.post("/send-contact-message", sendContactMessage);
 
 module.exports = router;

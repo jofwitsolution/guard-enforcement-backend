@@ -1,20 +1,26 @@
-const { sendMessage } = require('../nodemailer/contactMessage');
+const { sendMessage } = require("../nodemailer/contactMessage");
+const messageValidations = require("../validations/messageValidation");
 
-// @desc Receive contact message from users
-// @route POST /api/message/receive
+// @desc Send contact message
+// @route POST /api/message/send-contact-message
 // @access Public
-const receiveMessage = async (req, res) => {
-  const { fullName, email, subject, telephone, message } = req.body;
+const sendContactMessage = async (req, res) => {
+  const { error } = messageValidations.validateContactMessage(req.body);
+  if (error) {
+    return res.status(400).json({ message: error.details[0].message });
+  }
+
+  const { fullName, email, phone, message } = req.body;
 
   try {
-    await sendMessage({ fullName, email, subject, telephone, message });
+    await sendMessage({ fullName, email, phone, message });
     res.json({
-      message: 'Message sent successfully. We will contact you soon.',
+      message: "Message sent successfully. We will contact you soon.",
     });
   } catch (err) {
     console.error(err);
-    res.status(400).json({ message: 'Problem sending message' });
+    res.status(500).json({ message: "Problem sending message" });
   }
 };
 
-module.exports.receiveMessage = receiveMessage;
+module.exports.sendContactMessage = sendContactMessage;
