@@ -1,10 +1,9 @@
 const fs = require("fs");
 const path = require("path");
 const nodemailer = require("nodemailer");
-const { google } = require("googleapis");
 
 const filePath = path.join(__dirname, "../views", "contact-message.html");
-let html = fs.readFileSync(filePath, "utf-8");
+const htmlFile = fs.readFileSync(filePath, "utf-8");
 
 const userEmail = process.env.SMTP_MAIL;
 const pass = process.env.SMTP_PASSWORD;
@@ -13,7 +12,7 @@ const host = process.env.SMTP_HOST;
 
 const sendMessage = async ({ fullName, email, phone, message }) => {
   // Replace placeholders with values from the request body
-  html = html
+  const html = htmlFile
     .replace(/{{fullName}}/g, fullName)
     .replace(/{{email}}/g, email)
     .replace(/{{phone}}/g, phone)
